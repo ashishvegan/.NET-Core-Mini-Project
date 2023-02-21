@@ -11,11 +11,13 @@ namespace BasicEF
 {
     public class StudentContext : DbContext
     {
-        public DbSet<Student>? Students {get; set;}
+        public DbSet<Student> Students {get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=ASHISHL\\SQLEXPRESS01;User Id=;Password=;Database=students;Trusted_Connection=true;TrustServerCertificate=true;");            
+            var ConnectionObject = new ConnectionString();
+            var connectionString = ConnectionObject.Conn();
+            optionsBuilder.UseSqlServer(connectionString);            
         }
     }
 }
